@@ -80,7 +80,6 @@ class DeepLinkHandler {
   }
 }
 
-// Enums and Classes for better structure
 enum DeepLinkType { product, search, promo, unknown }
 
 class DeepLinkData {

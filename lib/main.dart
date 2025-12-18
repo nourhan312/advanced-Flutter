@@ -29,17 +29,13 @@ class _MyAppState extends State<MyApp> {
     // 2. Listen for incoming links
     DeepLinkHandler().linkStream.listen((data) {
       if (navigatorKey.currentState != null) {
-        // Handle specifically based on Type
         if (data.type == DeepLinkType.promo) {
-          // Logic: "Take me to first screen"
           navigatorKey.currentState!.popUntil((route) => route.isFirst);
 
-          // Optionally show feedback
           ScaffoldMessenger.of(navigatorKey.currentContext!).showSnackBar(
             SnackBar(content: Text(data.data), backgroundColor: Colors.green),
           );
         } else {
-          // Default Logic for other links (Product, Search, etc) -> Second Screen
           navigatorKey.currentState!.push(
             MaterialPageRoute(
               builder: (context) => SecondScreen(data: data.data),
@@ -70,3 +66,4 @@ class HomeScreen extends StatelessWidget {
     return Scaffold(appBar: AppBar(title: const Text("Deep Link Test")));
   }
 }
+    

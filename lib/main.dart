@@ -1,3 +1,4 @@
+import 'package:deep_links/screens/home_screen.dart';
 import 'package:deep_links/second_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -45,10 +46,9 @@ class _MyAppState extends State<MyApp> {
       }
     });
   }
-
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(navigatorKey: navigatorKey, home: const HomeScreen());
+    return MaterialApp(navigatorKey: navigatorKey, home:  HomeScreen());
   }
 
   @override
@@ -57,13 +57,6 @@ class _MyAppState extends State<MyApp> {
     super.dispose();
   }
 }
+    
 
-class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(appBar: AppBar(title: const Text("Deep Link Test")));
-  }
-}
     

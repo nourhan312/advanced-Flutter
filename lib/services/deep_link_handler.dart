@@ -1,5 +1,7 @@
 import 'dart:async';
 import 'package:app_links/app_links.dart';
+import 'package:deep_links/app_links.dart';
+import 'package:flutter/material.dart';
 
 class DeepLinkHandler {
   // Singleton pattern
@@ -22,7 +24,7 @@ class DeepLinkHandler {
       }
     } catch (e) {
       // Handle errors if any
-      print('Error getting initial link: $e');
+      debugPrint('Error getting initial link: $e');
     }
 
     // 2. Listen for incoming links while the app is running
@@ -31,13 +33,13 @@ class DeepLinkHandler {
         _handleLink(uri);
       },
       onError: (err) {
-        print('Error on link stream: $err');
+        debugPrint('Error on link stream: $err');
       },
     );
   }
 
   void _handleLink(Uri uri) {
-    print('Received Deep Link: $uri');
+    debugPrint('Received Deep Link: $uri');
 
     // 1. Scenario: Product Page
     if (uri.pathSegments.contains('product')) {
@@ -47,7 +49,7 @@ class DeepLinkHandler {
       );
     }
     // 2. Scenario: Search Page
-    else if (uri.pathSegments.contains('search')) {
+    else if   (uri.pathSegments.contains('search')) {
       final query = uri.queryParameters['q'] ?? 'No Query';
       final filter = uri.queryParameters['filter'] ?? 'All';
       _linkController.add(
@@ -80,11 +82,4 @@ class DeepLinkHandler {
   }
 }
 
-enum DeepLinkType { product, search, promo, unknown }
 
-class DeepLinkData {
-  final DeepLinkType type;
-  final String data;
-
-  DeepLinkData({required this.type, required this.data});
-}

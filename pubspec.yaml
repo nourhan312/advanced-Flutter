@@ -15,6 +15,9 @@ dependencies:
   cool_alert: ^2.0.1
   flutter_bloc: ^9.1.1
   flutter_local_notifications: ^19.5.0
+  firebase_core: ^4.3.0
+  firebase_messaging: ^16.0.0
+
 
 dev_dependencies:
   flutter_launcher_icons: ^0.13.1
@@ -35,3 +38,4 @@ flutter:
 
   assets:
     - assets/image.png
+    - assets/sounds/

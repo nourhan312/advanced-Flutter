@@ -1,6 +1,5 @@
-import 'package:bloc/bloc.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
-import 'package:meta/meta.dart';
 
 import '../services/create_uid.dart';
 import '../services/notification_util.dart';
@@ -17,7 +16,6 @@ class NotificationCubit extends Cubit<NotificationState> {
       emit(NotificationLoading());
       await notificationUtil.createBasicNotification(
         id: createUniqueId(),
-        // kept for API compatibility; not used by local plugin impl
         channelKey: 'basic_channel',
         title: 'Local Notification',
         body:
@@ -29,7 +27,6 @@ class NotificationCubit extends Cubit<NotificationState> {
     }
   }
 
-  /// Quick smoke test: schedule after 5 seconds.
   Future<void> scheduleNotificationIn5Seconds() async {
     try {
       emit(NotificationLoading());
@@ -69,7 +66,7 @@ class NotificationCubit extends Cubit<NotificationState> {
   Future<void> cancelAllNotifications(BuildContext context) async {
     try {
       emit(NotificationLoading());
-      await notificationUtil.cancelAll(context);
+      await notificationUtil.cancelAll();
       emit(NotificationSuccess('Cancelled all notifications'));
     } catch (e) {
       emit(NotificationError(e.toString()));
@@ -98,11 +95,4 @@ class NotificationCubit extends Cubit<NotificationState> {
       emit(NotificationError(e.toString()));
     }
   }
-
-  // =========================
-  // AWESOME NOTIFICATIONS API (old)
-  // =========================
-  // The previous Awesome Notifications methods are intentionally removed from
-  // the active Cubit implementation. If you need them later, you can restore
-  // them from git history / previous file versions.
 }

@@ -1,23 +1,5 @@
-// AWESOME NOTIFICATIONS (disabled)
-// import 'dart:io';
-// import 'package:awesome_notifications/awesome_notifications.dart';
-import 'package:flutter/material.dart';
-
-import '../constants/app_colors.dart';
-// import '../constants/app_constants.dart'; // not used in local implementation
 import 'local_notification_service.dart';
 
-// import '../main.dart';
-// import '../screens/home.dart';
-
-// =========================
-// NotificationUtil (LOCAL)
-// =========================
-/// A small wrapper used by `NotificationCubit`.
-///
-/// The project originally used `awesome_notifications`. That code is kept below
-/// as comments for reference, but the active implementation uses
-/// `flutter_local_notifications`.
 class NotificationUtil {
   final LocalNotificationService local;
 
@@ -32,7 +14,6 @@ class NotificationUtil {
     await local.showBasicNotification(id: id, title: title, body: body);
   }
 
-  /// Minimal scheduling for testing: show notification after [delay].
   Future<void> createScheduledNotificationAfter({
     required int id,
     required String title,
@@ -55,14 +36,8 @@ class NotificationUtil {
     await local.showNotificationWithActions(id: id, title: title, body: body);
   }
 
-  Future<void> cancelAll(BuildContext context) async {
+  Future<void> cancelAll() async {
     await local.cancelAll();
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(
-        content: Text('Cancelled all notifications'),
-        backgroundColor: AppColor.primaryColor,
-      ),
-    );
   }
 
   Future<void> createLongTextNotification({

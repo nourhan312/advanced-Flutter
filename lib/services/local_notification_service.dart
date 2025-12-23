@@ -105,6 +105,7 @@ class LocalNotificationService {
       importance: Importance.max,
       priority: Priority.high,
       playSound: true,
+
       sound: const RawResourceAndroidNotificationSound(
         androidSoundResourceName,
       ),
@@ -181,7 +182,7 @@ class LocalNotificationService {
           ],
         ),
         AndroidNotificationAction(
-          actionMarkAsReadId,
+          'Mark as read',
           'Mark as read',
           showsUserInterface: false,
           cancelNotification: true,
@@ -205,6 +206,8 @@ class LocalNotificationService {
   void _onNotificationResponse(NotificationResponse response) {
     if (response.actionId == actionReplyId) {
       final replyText = response.input;
+      // ignore: unused_local_variable
+      final _ = replyText;
       return;
     }
 

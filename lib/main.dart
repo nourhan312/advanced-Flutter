@@ -1,23 +1,26 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'firebase_options.dart';
 import 'screens/home.dart';
-
-// AWESOME NOTIFICATIONS (disabled)
-// import 'package:awesome_notifications/awesome_notifications.dart';
-
 import 'constants/app_colors.dart';
-// import 'constants/app_constants.dart'; // (kept only for old awesome setup)
 import 'package:notifications/cubit/notification_cubit.dart';
 import 'package:notifications/services/notification_util.dart';
 import 'package:notifications/services/local_notification_service.dart';
+import 'package:notifications/services/fcm_service.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+
+  FirebaseMessaging.onBackgroundMessage(firebaseMessagingBackgroundHandler);
+
   await LocalNotificationService().init();
+
+  // FCM setup (foreground listeners + token)
+  await FcmService(localNotifications: LocalNotificationService()).init();
 
   runApp(const MyApp());
 }
